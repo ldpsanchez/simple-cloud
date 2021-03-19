@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+
+  nginx:
+    image: nginx:1.18.0
+    container_name: webserver-nginx
+    working_dir: /var/www/
+    # command: "mkdir /var/www/php/"
+    volumes: 
+      - ./application:/var/www/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    ports: 
+      - "9090:80"
+    depends_on: 
+      - php
+
+  php:
+    image: php:7.4.16-fpm-buster
+    container_name: application-server
+    working_dir: /var/www/
+    volumes: 
+      - ./application:/var/www/
