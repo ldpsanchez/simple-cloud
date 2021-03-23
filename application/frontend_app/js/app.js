@@ -1,7 +1,7 @@
-let url_current_directory = "http://172.20.0.2/back_end_app/getCurrentDirectory.php";
-let url_create_write_file = "http://172.20.0.2/back_end_app/createAndWriteFile.php";
-let url_create_directory = "http://172.20.0.2/back_end_app/createDirectory.php";
-let url_list_files_serve = "http://172.20.0.2/back_end_app/getCurrentDirectory.php";
+let url_current_directory = "http://localhost:9090/back_end_app/getCurrentDirectory.php";
+let url_create_write_file = "http://localhost:9090/back_end_app/createAndWriteFile.php";
+let url_create_directory = "http://localhost:9090/back_end_app/createDirectory.php";
+let url_list_files_serve = "http://localhost:9090/back_end_app/getListOfFilesToServe.php";
 let btnShowModal = document.getElementById("btnCreateFile");
 let btnCloseModal = document.getElementById("btn-close-modal");
 let sendDataToserve = document.getElementById("printData");
@@ -16,7 +16,7 @@ let btnCreateDir = document.getElementById("btnCreateDir");
 const myFormElementDirectory = document.getElementById("myFormDirectory");
 let btnCloseMessage_directory = document.getElementById("btnCloseMessage-directory");
 
-// funcion anonima auto ejecutable
+// funcion anonima auto ejecutable (Obtener directorio actual de trabajo)
 (function () {
     fetch(url_current_directory)
     .then(response => {
@@ -25,6 +25,26 @@ let btnCloseMessage_directory = document.getElementById("btnCloseMessage-directo
         let newData = data_txt;
         document.getElementById("directory-name").textContent = `Directorio actual: ${newData}`;
     })
+})();
+
+// Funcion anonima auto ejecutable (Obtener lista de directorios y archivos dentro del directorio recurrente)
+(function () {
+    let selector = 0;
+
+    fetch(url_list_files_serve, {
+        method: "POST",
+        body: selector
+    }).then(response => response.json())
+    .then(function (dataServe) {
+        let dataToPrint = dataServe;
+
+        dataToPrint.forEach(function (iterador, indice) {
+            let bodySection = document.getElementById("body");
+            let contenedor = document.createElement("div");
+            contenedor.textContent = `${indice} - ${iterador}`;
+            bodySection.appendChild(contenedor);
+        })
+    });
 })();
 
 function toggleModal(){
