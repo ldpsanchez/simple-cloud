@@ -5,12 +5,17 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('content-type: application/json; charset=utf-8');
 
-// Obteniendo la data del frontend
-$homeDir = "/home/";
+$rootDirectory = "/var/www/";
+$home = "home";
 
-chdir($homeDir);
+chdir($rootDirectory);
+mkdir("{$rootDirectory}/$home");
 
-$getDirectory = getcwd();
-$scanDir = scandir($getDirectory);
+echo scandir(getcwd());
 
-echo $getDirectory;
+/* if (!file_exists($home)) {
+    mkdir("{$rootDirectory}/{$home}");
+    echo scandir(getcwd());
+} else {
+    echo getcwd();
+} */
