@@ -1,6 +1,4 @@
 FROM php:7.4.16-fpm-buster
 
-EXPOSE 9000
-
-RUN chown -R www-data:www-data /var/www/ \
+RUN chown -R www-data:www-data /var/www/html/ \
 & chown -R www-data:www-data /home/

@@ -6,7 +6,7 @@ header('content-type: application/json; charset=utf-8');
 
 $file_name = $_POST["nameFile"];
 $fileContents = $_POST["fileContents"];
-$rootDirectory = "/home/";
+$rootDirectory = "/home";
 
 function getCurrentDirectory() {
     return getcwd();
@@ -27,3 +27,4 @@ if (!empty($file_name) and !empty($fileContents)) {
 } else {
     echo "No hay datos para procesar!";
 }
+?>

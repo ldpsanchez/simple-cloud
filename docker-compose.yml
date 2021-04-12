@@ -3,10 +3,10 @@ services:
 
   nginx:
     image: nginx:1.18.0
-    container_name: webserver-nginx
-    working_dir: /var/www/
+    container_name: webserver_nginx
+    working_dir: /var/www/html
     volumes: 
-      - ./application:/var/www/
+      - ./application:/var/www/html
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     ports: 
       - "9090:80"
@@ -15,7 +15,7 @@ services:
 
   php:
     build: ./phpconf
-    container_name: application-server
+    container_name: app_serve
     working_dir: /var/www/
     volumes: 
-      - ./application:/var/www/
+      - ./application:/var/www/html
